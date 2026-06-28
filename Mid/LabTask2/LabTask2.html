@@ -31,7 +31,63 @@
             </ul>
         </section>
         <section class="form-section">
-            
+            <h2>Submit a Request</h2>
+            <form action="">
+
+
+                <div class="form-group">
+                    <label for="">Student Name</label>
+                    <input class="form-input" type="text" placeholder="Your Name" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="">Student Email</label>
+                    <input class="form-input" type="text" placeholder="example@gmail.com" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="">Service Type</label>
+                    <select class="form-input" name="" id="">
+                        <option value="" disabled selected>Select a service</option>
+                        <option value="transcript">Transcript Request</option>
+                        <option value="id-card">ID Card Issue</option>
+                        <option value="fee-waiver">Fee Waiver</option>
+                        <option value="doc-verification">Document Verification</option>
+                        <option value="general">General Inquiry</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="">Urgency Level</label>
+                    <div class="radio-group">
+                        <label class="radio-label" for="">
+                            <input name="urgency" type="radio"> Low
+                            
+                        </label>
+                        <label class="radio-label" for="">
+                            <input name="urgency" type="radio"> Medium
+                            
+                        </label>
+                        <label class="radio-label" for="">
+                            <input name="urgency" type="radio"> High
+                            
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="details">Additional Details</label>
+                    <textarea class="form-input" id="details" name="details" rows="5"
+                        placeholder="Describe your request in more detail..."></textarea>
+                </div>
+
+                <button>Submit Request</button>
+
+
+            </form>
         </section>
     </main>
     <footer>
