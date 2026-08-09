@@ -10,8 +10,8 @@
 <?php
 // PHP VALIDATION LOGIC
  
-$name = $age = $email = $membership = "";
-$nameErr = $ageErr = $emailErr = $membershipErr = "";
+$name = $age = $email = $membership = $department = "";
+$nameErr = $ageErr = $emailErr = $membershipErr = $departmentErr = "";
  
  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -57,6 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $membership = $_POST["membership"];
     }
+
+    // --- Validate Department ---
+    if (empty($_POST["department"])) {
+        $departmentErr = "Please select your department";
+    } else {
+        $department = $_POST["department"];
+    }
 }
  
 ?>
@@ -98,6 +105,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </span>
 
     <br><br>
+
+    Department:
+    <select name="department">
+        <option value="" <?php if ($department=="") echo "selected"; ?>>-- Select Department --</option>
+        <option value="CSE" <?php if ($department=="CSE") echo "selected"; ?>>CSE</option>
+        <option value="EEE" <?php if ($department=="EEE") echo "selected"; ?>>EEE</option>
+        <option value="BBA" <?php if ($department=="BBA") echo "selected"; ?>>BBA</option>
+        <option value="English" <?php if ($department=="English") echo "selected"; ?>>English</option>
+        <option value="Architecture" <?php if ($department=="Architecture") echo "selected"; ?>>Architecture</option>
+    </select>
+    <span style="color:red">
+        * <?php echo $departmentErr; ?>
+    </span>
+
+    <br><br>
  
     <input type="submit" name="submit" value="Submit">
  
@@ -106,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
  
  
-if ($_SERVER["REQUEST_METHOD"] == "POST" &&    empty($nameErr) &&    empty($ageErr) &&    empty($emailErr) && empty($membershipErr))
+if ($_SERVER["REQUEST_METHOD"] == "POST" &&    empty($nameErr) &&    empty($ageErr) &&    empty($emailErr) && empty($membershipErr) && empty($departmentErr))
     {
  
     echo "<h3>Your Input:</h3>";
@@ -114,6 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" &&    empty($nameErr) &&    empty($ageE
     echo "Age: $age <br>";
     echo "Email: $email <br>";
     echo "Membership Type: $membership <br>";
+    echo "Department: $department <br>";
 }
 ?>
  
