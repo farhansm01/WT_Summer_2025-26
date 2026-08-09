@@ -10,8 +10,8 @@
 <?php
 // PHP VALIDATION LOGIC
  
-$name = $age = $email = "";
-$nameErr = $ageErr = $emailErr = "";
+$name = $age = $email = $membership = "";
+$nameErr = $ageErr = $emailErr = $membershipErr = "";
  
  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -50,6 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $emailErr = "Invalid email format";
         }
     }
+
+    // --- Validate Membership Type ---
+    if (empty($_POST["membership"])) {
+        $membershipErr = "Please select a membership type";
+    } else {
+        $membership = $_POST["membership"];
+    }
 }
  
 ?>
@@ -81,6 +88,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </span>
  
     <br><br>
+
+    Membership Type:
+    <input type="radio" name="membership" value="Regular Member" <?php if ($membership=="Regular Member") echo "checked"; ?>> Regular Member
+    <input type="radio" name="membership" value="Executive Member" <?php if ($membership=="Executive Member") echo "checked"; ?>> Executive Member
+    <input type="radio" name="membership" value="Volunteer" <?php if ($membership=="Volunteer") echo "checked"; ?>> Volunteer
+    <span style="color:red">
+        * <?php echo $membershipErr; ?>
+    </span>
+
+    <br><br>
  
     <input type="submit" name="submit" value="Submit">
  
@@ -89,13 +106,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
  
  
-if ($_SERVER["REQUEST_METHOD"] == "POST" &&    empty($nameErr) &&    empty($ageErr) &&    empty($emailErr))
+if ($_SERVER["REQUEST_METHOD"] == "POST" &&    empty($nameErr) &&    empty($ageErr) &&    empty($emailErr) && empty($membershipErr))
     {
  
     echo "<h3>Your Input:</h3>";
     echo "Name: $name <br>";
     echo "Age: $age <br>";
     echo "Email: $email <br>";
+    echo "Membership Type: $membership <br>";
 }
 ?>
  
