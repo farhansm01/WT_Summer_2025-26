@@ -10,8 +10,8 @@
 <?php
 // PHP VALIDATION LOGIC
  
-$name = $age = $email = $membership = $department = "";
-$nameErr = $ageErr = $emailErr = $membershipErr = $departmentErr = "";
+$name = $age = $email = $membership = $department = $phone = "";
+$nameErr = $ageErr = $emailErr = $membershipErr = $departmentErr = $phoneErr = "";
  
  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -63,6 +63,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $departmentErr = "Please select your department";
     } else {
         $department = $_POST["department"];
+    }
+
+    // --- Validate Contact Number ---
+    if (empty($_POST["phone"])) {
+        $phoneErr = "Phone number is required";
+    } else {
+        $phone = $_POST["phone"];
+
+        if (!preg_match("/^[0-9]{11}$/", $phone)) {
+            $phoneErr = "Phone number must contain exactly 11 digits";
+        }
     }
 }
  
@@ -120,6 +131,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </span>
 
     <br><br>
+
+    Contact Number:
+    <input type="text" name="phone" value="<?php echo $phone; ?>">
+    <span style="color:red">
+        * <?php echo $phoneErr; ?>
+    </span>
+
+    <br><br>
  
     <input type="submit" name="submit" value="Submit">
  
@@ -128,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
  
  
-if ($_SERVER["REQUEST_METHOD"] == "POST" &&    empty($nameErr) &&    empty($ageErr) &&    empty($emailErr) && empty($membershipErr) && empty($departmentErr))
+if ($_SERVER["REQUEST_METHOD"] == "POST" &&    empty($nameErr) &&    empty($ageErr) &&    empty($emailErr) && empty($membershipErr) && empty($departmentErr) && empty($phoneErr))
     {
  
     echo "<h3>Your Input:</h3>";
@@ -137,6 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" &&    empty($nameErr) &&    empty($ageE
     echo "Email: $email <br>";
     echo "Membership Type: $membership <br>";
     echo "Department: $department <br>";
+    echo "Contact Number: $phone <br>";
 }
 ?>
  
